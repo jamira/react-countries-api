@@ -4,7 +4,7 @@ import BorderCountries from "../BorderCountries";
 import styles from './styles.module.scss'
 
 const Country = () => {
-    const { country, getCountry } = useCountry()
+    const { country, setCountry } = useCountry()
     const { countryQuery } = useCountryData(country)
 
     const { data: countryItem, status } = countryQuery
@@ -28,9 +28,9 @@ const Country = () => {
         const formattedCurrency = Object.keys(countryItem[0].currencies).toString()
 
         return (
-            <div className={styles.country}>
+            <>
                 <div className={styles.country__btn}>
-                    <button className='btn' onClick={() => getCountry('')}>Back</button>
+                    <button className='btn' onClick={() => setCountry('')}>Back</button>
                 </div>
                 <div className={styles.country__inner}>
                     <div className={styles.country__inner__flag}>
@@ -38,7 +38,7 @@ const Country = () => {
                     </div>
                     <div className={styles.country__inner__detail}>
                         <h1 className={styles.country____inner__name}>{countryItem[0].name}</h1>
-                        <ul className={styles.country____inner__list_detail}>
+                        <ul className={styles.country__inner__detail_list}>
                             {/* <li>Native Name: <span>{formattedNativeName(countryItem[0].native)}</span></li> */}
                             <li>Population: <span>{formattedPopulation}</span></li>
                             <li>Region: <span>{countryItem[0].region}</span></li>
@@ -55,7 +55,7 @@ const Country = () => {
                             </div>)}
                     </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

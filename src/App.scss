@@ -57,6 +57,10 @@ ul {
   gap: 74px;
   grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
   padding-bottom: 45px;
+
+  > div:only-child {
+    width: 264px;
+  }
 }
 
 #searchFilterWrapper {
@@ -100,6 +104,12 @@ ul {
 
   .spinner {
     box-shadow: 28px 0px 0 0 rgb(255 255 255 / 20%), 22.7px 16.5px 0 0 rgb(255 255 255 / 40%), 8.68px 26.6px 0 0 rgb(255 255 255 / 60%), -8.68px 26.6px 0 0 rgb(255 255 255 / 80%), -22.7px 16.5px 0 0 #ffffff;
+  }
+
+  .borderCountries {
+    li {
+      background: var(--dark-color-light);
+    }
   }
 }
 

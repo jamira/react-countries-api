@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styles from './styles.module.scss'
 import { useCountry } from '../../contexts/CountryProvider';
 import clsx from 'clsx';
+import { useMemo } from 'react';
 
 const FilterCountry = () => {
     const regions = [
+        {
+            name: 'Filter by Regions',
+            value: ''
+        },
         {
             name: 'Africa',
             value: 'africa'
@@ -30,19 +35,19 @@ const FilterCountry = () => {
     const [region, setRegion] = useState('')
     const [isToggle, setToggle] = useState(false)
 
-    const { filterCountry } = useCountry()
+    const { setFilterRegion } = useCountry()
 
     const onChangeRegion = (name) => {
         setRegion(name)
         setToggle(false)
-        filterCountry(name)
+        setFilterRegion(name)
     }
 
 
     return (
         <div className={clsx(styles.filterCountry, styles.regions)}>
             <ul className={clsx(styles.regions__default, styles.filterBox)} onClick={() => setToggle(!isToggle)}>
-                <li>{`${!region.length ? 'Filter by Regions' : region}`}</li>
+                <li>{`${!region.length ? regions[0].name : region}`}</li>
             </ul>
             {isToggle &&
                 <ul className={clsx(styles.regions__children, styles.filterBox)}>

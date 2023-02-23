@@ -12,6 +12,9 @@ export const fetchRegion = async (region) => {
 
 export const fetchCountry = async (name) => {
     const res = await fetch(`${apiEndpont}/name/${name}`)
+    if (!res.ok) {
+        throw new Error(`Failed to fetch data: ${res.status}`);
+    }
     return await res.json()
 }
 

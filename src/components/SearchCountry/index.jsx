@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import styles from './styles.module.scss'
 import { useCountry } from '../../contexts/CountryProvider';
 
-const SearchForm = () => {
+const SearchForm = ({ setQuery }) => {
     const [search, setSearch] = useState('')
-
-    const { searchCountry } = useCountry()
+    const { setFilterRegion } = useCountry()
 
     const handleSearch = (e) => {
         e.preventDefault()
@@ -15,8 +14,10 @@ const SearchForm = () => {
             return
         }
 
-        searchCountry(search)
+        setQuery(search)
         setSearch('')
+        setFilterRegion('')
+
     }
 
     return (

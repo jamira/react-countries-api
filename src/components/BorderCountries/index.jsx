@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 
 const BorderCountries = ({ codes }) => {
     const { codesQuery } = useCountryCodeData(codes)
-    const { getCountry } = useCountry()
+    const { setCountry } = useCountry()
 
     if (codesQuery.isLoading) {
         return <h1>Loading</h1>
@@ -24,7 +24,7 @@ const BorderCountries = ({ codes }) => {
     return (
         <div className={styles.borderCountries}>
             <p>Border Countries:</p>
-            <ul>{countryNames.map(({ name }, index) => (<li key={index} onClick={() => getCountry(name)}>{name}</li>))}</ul>
+            <ul>{countryNames.map(({ name }, index) => (<li key={index} onClick={() => setCountry(name)}>{name}</li>))}</ul>
         </div>
     );
 }

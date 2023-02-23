@@ -4,28 +4,11 @@ const CountryContext = createContext()
 
 const CountryProvider = ({ children }) => {
     const [country, setCountry] = useState('')
-    const [searchName, setSearchName] = useState('')
     const [filterRegion, setFilterRegion] = useState('')
 
-    const getCountry = (name) => {
-        setCountry(name)
-    }
-
-    const searchCountry = (name) => {
-        setSearchName(name)
-    }
-
-    const clearCountry = () => {
-        setSearchName('')
-        setCountry('')
-    }
-
-    const filterCountry = (region) => {
-        setFilterRegion(region)
-    }
 
     return (
-        <CountryContext.Provider value={{ country, searchName, filterRegion, getCountry, searchCountry, clearCountry, filterCountry }}>
+        <CountryContext.Provider value={{ country, filterRegion, setCountry, setFilterRegion }}>
             {children}
         </CountryContext.Provider>
     )

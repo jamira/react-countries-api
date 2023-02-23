@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { fetchCountries, fetchRegion, fetchCountry } from "../api/countries";
 
-export const useCountriesData = (region, country) => {
+export const useCountriesData = (region) => {
     const [countries, setCountries] = useState([])
 
     const formattedCountries = (data) => {
-        return data.map(item => {
+        return data?.map(item => {
             return {
                 name: item.name.common,
                 population: item.population,
@@ -17,33 +17,25 @@ export const useCountriesData = (region, country) => {
         })
     }
 
-    const regionQuery = useQuery(['countries-by-regions', region], () => fetchRegion(region), {
+    const regionQuery = useQuery(['countries-by-regions', region,], () => fetchRegion(region), {
         enabled: !!region,
         select: formattedCountries,
-        onSuccess: (filteredData) => {
-            setCountries(filteredData)
-        }
+        onSuccess: (filteredData) => setCountries(filteredData)
     })
 
-    const countriesQuery = useQuery('all-countries', fetchCountries, {
-        select: formattedCountries,
-        onSuccess: (data) => {
-            setCountries(data)
+    const countriesQuery = useQuery(
+        ['all-countries'], 
+        fetchCountries, 
+        {
+            select: formattedCountries,
+            onSuccess: (data) => setCountries(data),
+            refetchOnWindowFocus: false
         }
-    })
-
-    const searchQuery = useQuery(['search-by-country', country], () => fetchCountry(country), {
-        enabled: !!country,
-        select: formattedCountries,
-        onSuccess: (searchData) => {
-            setCountries(searchData)
-        }
-    })
+    )
 
     return {
         regionQuery,
         countriesQuery,
-        searchQuery,
         countries
     }
 }

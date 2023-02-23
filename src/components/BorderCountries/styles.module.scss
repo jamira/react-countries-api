@@ -4,6 +4,9 @@
     
     p {
         margin: 0 10px 0 0;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 32px;
     }
 
     li {
@@ -23,3 +26,17 @@
         cursor: pointer;
     }
 }
+
+@media only screen and (max-width: 759px) { 
+    .borderCountries {
+        display: block;
+    }
+}
+
+[data-theme='dark'] {  
+    .borderCountries {
+      li {
+        background: var(--dark-color-light);
+      }
+    }
+  }
